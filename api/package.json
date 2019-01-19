@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
+    "startME": "mongo-express -u admin -p pass -d jwt -H localhost -P 27017",
     "startDB": "mongod --dbpath=./data/"
   },
   "keywords": [],
@@ -13,6 +14,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "mongoose": "^5.4.5"
+    "mongoose": "^5.4.5",
+    "morgan": "^1.9.1"
   }
 }
