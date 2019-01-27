@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const { generateToken } = require('../utils/jwt')
 
 exports.signup = async (req, res) => {
   try {
@@ -17,7 +18,7 @@ exports.login = async (req, res) => {
   try {
     const u = await User.findOne({ username })
     if (!u.comparePassword(password)) throw Error('密码错误！')
-    res.json({ username })
+    res.json({ token: generateToken({ username }) })
   } catch (error) {
     res.status(406).json({ msg: '用户名密码错误' })
   }
