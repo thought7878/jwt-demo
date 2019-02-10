@@ -3,7 +3,7 @@ const { JWT_SECERET } = require('../config')
 
 const generateToken = user => {
   return jwt.sign(user, JWT_SECERET, {
-    expiresIn: 5
+    expiresIn: 600
   })
 }
 
@@ -18,7 +18,11 @@ const requireAuth = (req, res, next) => {
           return res.status(401).json({ msg: '认证失败！' })
         }
       } else {
-        next()
+        if (decoded.admin === true) {
+          next()
+        } else {
+          return res.status(401).json({ msg: '认证失败！' })
+        }
       }
     })
   } else {

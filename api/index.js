@@ -3,10 +3,12 @@ const { PORT, DB_PATH } = require('./config')
 const app = express()
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
+const cors = require('cors')
 
 // middleware
 app.use(bodyParser.json())
 app.use(morgan('tiny'))
+app.use(cors())
 
 // DB
 const mongoose = require('mongoose')

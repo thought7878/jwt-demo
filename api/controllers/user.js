@@ -18,7 +18,7 @@ exports.login = async (req, res) => {
   try {
     const u = await User.findOne({ username })
     if (!u.comparePassword(password)) throw Error('密码错误！')
-    res.json({ token: generateToken({ username }) })
+    res.json({ token: generateToken({ username, admin: u.admin }) })
   } catch (error) {
     res.status(406).json({ msg: '用户名密码错误' })
   }
