@@ -7,6 +7,12 @@ import AccountCircle from '@material-ui/icons/AccountCircle'
 import HomeIcon from '@material-ui/icons/Home'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
+import PropTypes from 'prop-types'
+
+const propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  goto: PropTypes.func.isRequired
+}
 
 class Header extends Component {
   state = {
@@ -18,12 +24,17 @@ class Header extends Component {
 
   render() {
     const { anchorEl } = this.state
+    const { isAuthenticated, goto } = this.props
     const open = Boolean(anchorEl)
 
     const login = (
       <Login>
-        <StyledButton color="inherit">登陆</StyledButton>
-        <StyledButton color="inherit">注册</StyledButton>
+        <StyledButton onClick={() => goto('/login')} color="inherit">
+          登陆
+        </StyledButton>
+        <StyledButton onClick={() => goto('/signup')} color="inherit">
+          注册
+        </StyledButton>
       </Login>
     )
     const logout = (
@@ -41,10 +52,10 @@ class Header extends Component {
     return (
       <AppBar position="static">
         <Inner>
-          <IconButton color="inherit">
+          <IconButton onClick={() => goto('/')} color="inherit">
             <StyledHomeIcon />
           </IconButton>
-          {true ? logout : login}
+          {isAuthenticated ? logout : login}
         </Inner>
       </AppBar>
     )
