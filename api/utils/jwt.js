@@ -3,7 +3,7 @@ const { JWT_SECERET } = require('../config')
 
 const generateToken = user => {
   return jwt.sign(user, JWT_SECERET, {
-    expiresIn: 600
+    expiresIn: 6 //单位为秒
   })
 }
 

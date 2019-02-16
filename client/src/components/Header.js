@@ -62,6 +62,8 @@ class Header extends Component {
   }
 }
 
+Header.propTypes = propTypes
+
 export default Header
 
 const Inner = styled.div`
@@ -79,6 +81,7 @@ const StyledHomeIcon = styled(HomeIcon)`
 const StyledButton = styled(Button)`
   && {
     line-height: 32px;
+    height: 72px;
   }
 `
 
