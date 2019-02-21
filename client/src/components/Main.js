@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 import Header from '../containers/HeaderContainer'
 import { Switch, Route } from 'react-router'
-import Home from '../components/Home'
-import Login from '../components/Login'
-import Signup from '../components/Signup'
+import Home from '../containers/HomeContainer'
+import Login from '../containers/LoginContainer'
+import Signup from '../containers/SignupContainer'
 
 const GlobalStyle = createGlobalStyle`
   body {
