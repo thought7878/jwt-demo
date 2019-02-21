@@ -11,7 +11,8 @@ import PropTypes from 'prop-types'
 
 const propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  goto: PropTypes.func.isRequired
+  goto: PropTypes.func.isRequired,
+  currentUser: PropTypes.string.isRequired
 }
 
 class Header extends Component {
@@ -22,9 +23,16 @@ class Header extends Component {
     this.setState({ anchorEl: event.currentTarget })
   }
 
+  handleLogout = () => {
+    this.props.logout()
+    this.setState({
+      anchorEl: null
+    })
+  }
+
   render() {
     const { anchorEl } = this.state
-    const { isAuthenticated, goto } = this.props
+    const { isAuthenticated, goto, currentUser } = this.props
     const open = Boolean(anchorEl)
 
     const login = (
@@ -43,8 +51,8 @@ class Header extends Component {
           <AccountCircle />
         </IconButton>
         <Menu anchorEl={anchorEl} open={open}>
-          <MenuItem>账号</MenuItem>
-          <MenuItem>退出</MenuItem>
+          <MenuItem>{currentUser}</MenuItem>
+          <MenuItem onClick={this.handleLogout}>退出</MenuItem>
         </Menu>
       </Logout>
     )
@@ -86,4 +94,6 @@ const StyledButton = styled(Button)`
 `
 
 const Login = styled.div``
-const Logout = styled.div``
+const Logout = styled.div`
+  /* height: 72px; */
+`
