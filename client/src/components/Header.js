@@ -30,6 +30,12 @@ class Header extends Component {
     })
   }
 
+  handleMenuClose = () => {
+    this.setState({
+      anchorEl: null
+    })
+  }
+
   render() {
     const { anchorEl } = this.state
     const { isAuthenticated, goto, currentUser } = this.props
@@ -50,7 +56,7 @@ class Header extends Component {
         <IconButton onClick={this.handleMenu} color="inherit">
           <AccountCircle />
         </IconButton>
-        <Menu anchorEl={anchorEl} open={open}>
+        <Menu anchorEl={anchorEl} open={open} onClose={this.handleMenuClose}>
           <MenuItem>{currentUser}</MenuItem>
           <MenuItem onClick={this.handleLogout}>退出</MenuItem>
         </Menu>
