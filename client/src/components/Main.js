@@ -17,6 +17,10 @@ const GlobalStyle = createGlobalStyle`
 `
 
 class Main extends Component {
+  componentDidMount() {
+    this.props.loadCurrentUserIfNeeded()
+  }
+
   render() {
     return (
       <Wrap>

@@ -3,6 +3,7 @@ import axios from 'axios'
 import { LOGIN_URL, SIGNUP_URL } from '../constants/ApiConstants'
 import { decodeJwt } from '../utils/jwtUtils'
 import * as types from '../constants/ActionTypes'
+import { getIsExpired } from '../utils/jwtUtils'
 
 export const login = data => async dispatch => {
   try {
@@ -49,4 +50,23 @@ export const logout = () => dispatch => {
   dispatch({
     type: types.LOGOUT_SUCCESS
   })
+}
+
+export const loadCurrentUserIfNeeded = () => dispatch => {
+  const token = window.localStorage.getItem('jwtToken')
+  if (token) {
+    if (getIsExpired(token)) {
+      window.localStorage.removeItem('jwtToken')
+      dispatch({ type: types.LOGOUT_SUCCESS })
+      historyPush('/login')
+      return console.log('登陆失效，请重新登陆')
+    } else {
+      const { username, admin } = decodeJwt(token)
+      dispatch({
+        type: types.LOAD_CURRENT_USER,
+        currentUser: username,
+        isAdmin: admin
+      })
+    }
+  }
 }
