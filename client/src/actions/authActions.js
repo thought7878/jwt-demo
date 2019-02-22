@@ -4,6 +4,7 @@ import { LOGIN_URL, SIGNUP_URL } from '../constants/ApiConstants'
 import { decodeJwt } from '../utils/jwtUtils'
 import * as types from '../constants/ActionTypes'
 import { getIsExpired } from '../utils/jwtUtils'
+import { alert } from './index'
 
 export const login = data => async dispatch => {
   try {
@@ -20,7 +21,7 @@ export const login = data => async dispatch => {
     })
     dispatch(historyPush('/'))
   } catch (error) {
-    error.response && console.log('error', error.response.data.msg)
+    error.response && dispatch(alert(error.response.data.msg))
   }
 }
 
@@ -40,7 +41,7 @@ export const signup = data => async dispatch => {
   } catch (error) {
     console.log('error:', error)
 
-    error.response && console.log('error', error.response.data.msg)
+    error.response && dispatch(alert(error.response.data.msg))
   }
 }
 
@@ -59,7 +60,7 @@ export const loadCurrentUserIfNeeded = () => dispatch => {
       window.localStorage.removeItem('jwtToken')
       dispatch({ type: types.LOGOUT_SUCCESS })
       historyPush('/login')
-      return console.log('登陆失效，请重新登陆')
+      return dispatch(alert('登陆失效，请重新登陆'))
     } else {
       const { username, admin } = decodeJwt(token)
       dispatch({

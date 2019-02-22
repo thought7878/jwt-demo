@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router'
 import Home from '../containers/HomeContainer'
 import Login from '../containers/LoginContainer'
 import Signup from '../containers/SignupContainer'
+import Alert from '../containers/AlertContainer'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -26,6 +27,7 @@ class Main extends Component {
       <Wrap>
         <GlobalStyle />
         <Header />
+        <Alert />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />

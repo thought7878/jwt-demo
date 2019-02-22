@@ -27,4 +27,15 @@ const currentUser = (state = '', action) => {
   }
 }
 
-export default combineReducers({ isAuthenticated, currentUser })
+const alert = (state = '', action) => {
+  switch (action.type) {
+    case types.ALERT:
+      return action.msg
+    case types.HIDE_ALERT:
+      return ''
+    default:
+      return state
+  }
+}
+
+export default combineReducers({ isAuthenticated, currentUser, alert })
