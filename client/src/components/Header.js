@@ -95,11 +95,15 @@ const StyledHomeIcon = styled(HomeIcon)`
 const StyledButton = styled(Button)`
   && {
     line-height: 32px;
-    height: 72px;
+    /* height: 72px; */
   }
 `
 
-const Login = styled.div``
+const Login = styled.div`
+  display: flex;
+  align-items: center;
+`
 const Logout = styled.div`
-  /* height: 72px; */
+  display: flex;
+  align-items: center;
 `
